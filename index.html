@@ -2,13 +2,137 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./src/style.css" rel="stylesheet">
-    <title>Vite + Vue</title>
+    <title>BadBunny Cover</title>
+    <link rel="stylesheet" href="./src/style.css">
   </head>
   <body>
-    <canvas id="albumCover"></canvas>
-    <script type="module" src="/src/main.js"></script>
+    <div id="header">
+        <div id="details">
+          <h1>Soy y Sombra</h1>
+          <p id="headerDetails">Le nouvel univers sonore de Bad Bunny, où le soleil brûle et l’ombre apaise.</p>
+          <p id="headerDetails">Dans "Sol y Sombra", Bad Bunny explore les contrastes de la vie : la lumière et l'obscurité, la fête et la mélancolie, l’amour et la solitude. Cet album mêle reggaeton percussif, ballades émouvantes et collaborations surprenantes avec des artistes internationaux. Une invitation à voyager entre chaleur tropicale et profondeur émotionnelle.</p>
+          <button class="listenNow">
+            <span class="textBtn">Écouter maintenant</span>
+          </button>
+        </div>
+        <div id="imageHeader">
+          <h1>Active Image</h1>
+        </div>
+      </div>
+
+      <div id="aboutContent">
+        <div id="aboutArtist">
+          <h1 class="aboutTitle">À propos de Bad Bunny</h1>
+          <p id="textAbout">Bad Bunny, de son vrai nom Benito Antonio Martínez Ocasio, est une superstar mondiale et l’une des figures les plus influentes de la musique latine et urbaine. Originaire de Porto Rico, il a révolutionné le reggaeton et la trap latino en y injectant créativité, authenticité et des touches de pop, rock et musique électronique.
+            Avec plusieurs Grammy Awards et des milliards de streams à son actif, Bad Bunny est une icône culturelle, célébrée pour sa musique avant-gardiste et son engagement social.</p>
+        </div>
+
+        <div class="container">
+          <input type="radio" name="slider" id="item-1" checked>
+          <input type="radio" name="slider" id="item-2">
+          <input type="radio" name="slider" id="item-3">
+          <div class="cards">
+            <label class="card" for="item-1" id="song-1">
+              <img src="./public/badb.jpeg" alt="Image de l'album 1">
+            </label>
+            <label class="card" for="item-2" id="song-2">
+              <img src="./public/badBo.jpg" alt="Image de l'album 2">
+            </label>
+            <label class="card" for="item-3" id="song-3">
+              <img src="./public/badBo1.avif" alt="Image de l'album 3">
+            </label>
+          </div>
+        </div>
+
+        <div id="aboutAlbum">
+          <h1 class="aboutTitle">À propos de Sol y Sombra</h1>
+          <p id="textAbout">Cet album marque une nouvelle ère pour Bad Bunny. Inspiré par ses voyages récents, sa quête de sérénité et son envie de repousser les frontières du genre, "Sol y Sombra" propose :
+            <ul>
+              <li>
+                15 titres inédits : Un mélange de morceaux énergiques et introspectifs.
+              </li>
+              <li>
+                Des collaborations surprises : Avec des stars internationales de la musique.
+              </li>
+              <li>
+                Une expérience immersive : Plongez dans un univers sonore qui combine rythmes latins et influences mondiales.
+              </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+
+      <div class="newsong-container">
+        <img src="./public/badBo.jpg" alt="">
+        <img src="./public/badBo.jpg" alt="">
+        <img src="./public/badBo.jpg" alt="">
+      </div>
+
+      <div id="statsSection">
+        <h1 id="statsTitle">Statistiques Impressionnantes</h1>
+        <div id="stats">
+          <div id="stat">
+            <img src="./public/spotify.png" alt="">
+            <span id="statsText">80 millions d’auditeurs mensuels sur Spotify.</span>
+          </div>
+          <div id="stat">
+            <img src="./public/globe (1).png" alt="">
+            <span id="statsText">Plus de 40 milliards de streams cumulés dans le monde.</span>
+          </div>
+          <div id="stat">
+            <img src="./public/star (1).png" alt="">
+            <span id="statsText">Artiste Spotify le plus streamé pendant trois années consécutives.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lastAlbumContainer">
+        <div id="lastAlbumInfo">
+          <h1>Derniers albums</h1>
+          <span>Plongez dans l'univers unique de Bad Bunny avec ses trois derniers albums. Du solaire <i>Un Verano Sin Ti</i> (2022) aux sonorités introspectives de <i>Nadie Sabe Lo Que Va a Pasar Mañana</i> (2023) et au récent <i>Debí Tirar Más Fotos</i> (2025), chaque opus révèle une facette différente de l'artiste, entre rythmes latins entraînants et réflexions profondes. Un voyage musical à ne pas manquer !</span>
+        </div>
+
+        <div class="lastAlbum-carousel">
+          <input type="radio" name="lastAlbumSlider" id="album-1" checked>
+          <input type="radio" name="lastAlbumSlider" id="album-2">
+          <input type="radio" name="lastAlbumSlider" id="album-3">
+          <div class="lastAlbum-cards">
+            <label class="lastAlbum-card" for="album-1">
+              <img src="./public/badb.jpeg" alt="Image de l'album 1">
+            </label>
+            <label class="lastAlbum-card" for="album-2">
+              <img src="./public/badBo.jpg" alt="Image de l'album 2">
+            </label>
+            <label class="lastAlbum-card" for="album-3">
+              <img src="./public/badBo1.avif" alt="Image de l'album 3">
+            </label>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="pressReviewContainer">
+        <div id="pressReview">
+          <h1>Avis de la presse</h1>
+            <p>80 millions d’auditeurs mensuels sur Spotify.</p>
+            <p>Plus de 40 milliards de streams cumulés dans le monde.</p>
+            <p>Artiste Spotify le plus streamé pendant trois années consécutives.</p>
+        </div>
+        <div id="review">
+          <div id="review1">
+            <p id="reviewAuthor">Rolling Stone:</p>
+            <p id="reviewContent">"Bad Bunny transcende les genres et repousse les limites du reggaeton avec brio."</p>
+          </div>
+          <div id="review2">
+            <p id="reviewAuthor">New York Times:</p>
+            <p id="reviewContent">"Un visionnaire de la musique latine qui redéfinit la pop mondiale"</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

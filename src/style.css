@@ -1,16 +1,324 @@
+@import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap");
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #040506;
+  color: rgba(255, 255, 255, 0.87);
+}
+
 body {
   margin: 0;
+}
+
+/* Header Styles */
+#header {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(255, 34, 34);
+  background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
+}
+
+#details {
+  margin: auto 100px;
+  width: 50vw;
+  font-size: 18px;
+}
+
+#headerDetails {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+#imageHeader {
+  margin: auto;
+  opacity: 0.5;
+  width: 50vw;
+}
+
+/* About Content Styles */
+#aboutContent {
+  background-color: #040506;
+  width: 100vw;
+}
+
+#aboutArtist,
+#aboutAlbum {
+  padding: 1rem 4rem;
+  text-align: center;
+}
+
+#aboutAlbum ul {
+  padding-left: 1.2rem;
+  margin: 0;
+  opacity: 0.5;
+}
+
+#aboutAlbum li {
+  margin: 0;
   padding: 0;
-  background: #000; /* Black background for a modern look */
+  list-style-position: inside;
+  font-size: 18px;
+}
+
+
+#textAbout {
+  opacity: 0.5;
+  font-size: 18px;
+}
+
+.listenNow {
+  background-color: white;
+  padding: 1rem 4rem;
+  border: none;
+  border-radius: 8px;
+}
+
+.textBtn {
+  color: #040506;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.aboutTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Carrousel Styles */
+input[type=radio] {
+  display: none;
+}
+
+.card {
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transition: transform .4s ease, opacity .4s ease;
+  cursor: pointer;
+}
+
+.container {
+  width: 80%;
+  height: 80%;
+  transform-style: preserve-3d;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  /* flex-direction: column; */
+  align-items: center;
+  margin: auto;
 }
 
-canvas {
-  display: block;
-  border: 2px solid #FB385A; /* Stylish border to frame the cover */
-  box-shadow: 0 0 20px rgba(251, 56, 90, 0.8);
+.cards {
+  position: relative;
+  width: 700px;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+#item-1:checked ~ .cards #song-3,
+#item-2:checked ~ .cards #song-1,
+#item-3:checked ~ .cards #song-2 {
+  transform: translatex(-40%) scale(.8);
+  opacity: .4;
+  z-index: 0;
+}
+
+#item-1:checked ~ .cards #song-2,
+#item-2:checked ~ .cards #song-3,
+#item-3:checked ~ .cards #song-1 {
+  transform: translatex(40%) scale(.8);
+  opacity: .4;
+  z-index: 0;
+}
+
+#item-1:checked ~ .cards #song-1,
+#item-2:checked ~ .cards #song-2,
+#item-3:checked ~ .cards #song-3 {
+  transform: translatex(0) scale(1);
+  opacity: 1;
+  z-index: 1;
+  img {
+    box-shadow: 0px 0px 5px 0px rgba(81, 81, 81, 0.47);
+  }
+}
+
+.newsong-container{
+  display: flex;
+  width: 90%;
+  margin: 4rem auto;
+  justify-content: space-around;
+  margin-top: 2rem;
+
+  img{
+    height: 250px;
+    width: 250px;
+  }
+}
+
+#statsSection{
+  padding-top: 2rem;
+  background-color: white;
+  height: 350px;
+}
+
+#statsTitle{
+  width: 600px;
+  margin-bottom: 4rem;
+  padding-left: 9rem;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#stats {
+  display: flex;
+  flex-direction: row; /* Aligne les statistiques en ligne */
+  justify-content: space-between; /* Espacement entre les éléments */
+  align-items: center; /* Centre verticalement les images et le texte */
+  gap: 2rem; /* Espacement entre chaque élément */
+  margin: auto;
+  width: 80%; /* Ajuste la largeur totale */
+}
+
+#stat {
+  display: flex;
+  align-items: center; /* Centre verticalement le texte et l'image */
+  gap: 1rem; /* Espacement entre l'image et le texte */
+}
+
+#stat img {
+  width: 64px;
+  height: 64px;
+}
+
+#statsText {
+  color: #040506;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#lastAlbumInfo h1{
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#lastAlbumInfo{
+  width: 60%;
+}
+
+.lastAlbumContainer{
+  padding: 4rem;
+}
+
+/* Styles pour le carrousel des derniers albums */
+.lastAlbum-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  margin: 20px auto;
+  transform-style: preserve-3d;
+}
+
+.lastAlbum-cards {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lastAlbum-card {
+  position: absolute;
+  width: 40%;
+  height: 80%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  cursor: pointer;
+}
+
+.lastAlbum-card img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Transformations pour les cartes */
+#album-1:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(1),
+#album-2:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(2),
+#album-3:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(3) {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+
+#album-1:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(2),
+#album-2:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(3),
+#album-3:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(1) {
+  transform: translateX(40%) scale(0.8);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+#album-1:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(3),
+#album-2:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(1),
+#album-3:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(2) {
+  transform: translateX(-40%) scale(0.8);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+/* Masquer les boutons radio */
+input[type="radio"] {
+  display: none;
+}
+
+#pressReview h1{
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pressReviewContainer{
+  padding: 4rem;
+  width: 80%;
+}
+#review{
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 80%;
+}
+
+#reviewAuthor{
+  font-size: 48px;
+}
+#reviewContent{
+  font-size: 24px;
 }
