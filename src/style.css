@@ -8,9 +8,10 @@
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
-/* Header */
+
 
 #header {
   display: flex;
@@ -35,7 +36,7 @@ body {
   width: 50vw;
 }
 
-/* Animation de vague pour chaque lettre */
+
 @keyframes waveEffect {
   0% {
     transform: translateY(0);
@@ -51,14 +52,14 @@ body {
   }
 }
 
-/* Appliquer l'animation à chaque titre */
+
 h1.waveTitle span {
   display: inline-block;
-  animation: waveEffect 3s ease-in-out infinite; /* Animation continue avec répétition infinie */
+  animation: waveEffect 3s ease-in-out infinite; 
   opacity: 1;
   background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; /* Initialement cachée pour l'effet de vague */
+  -webkit-text-fill-color: transparent; 
 }
 
 h1.waveTitle {
@@ -67,13 +68,13 @@ h1.waveTitle {
   font-family: 'Playfair Display', serif;
   margin: 20px 0;
   text-align: center;
-  color: #FF6F00; /* Couleur chaude pour le texte principal */
-  text-shadow: 2px 2px 5px rgba(255, 87, 34, 0.7); /* Ombre portée avec une teinte chaude */
-  word-spacing: 10px; /* Ajouter de l'espace entre les mots */
-  white-space: nowrap; /* Empêcher les mots de se casser */
+  color: #FF6F00; 
+  text-shadow: 2px 2px 5px rgba(255, 87, 34, 0.7); 
+  word-spacing: 10px; 
+  white-space: nowrap; 
 }
 
-/* Carrousel Styles et autres sections */
+
 .newAlbumSongCover {
   width: 200px;
   height: 200px;
@@ -101,7 +102,7 @@ h1.waveTitle {
   width: 500px;
 }
 
-/* Autres styles pour le reste du site */
+
 .listenNow {
   background-color: #040506;
   padding: 1rem 4rem;
@@ -138,7 +139,7 @@ h1.waveTitle {
   width: 50vw;
 }
 
-/* Carrousel Styles */
+
 input[type=radio] {
   display: none;
 }
@@ -161,7 +162,7 @@ input[type=radio] {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* flex-direction: column; */
+  
   align-items: center;
   margin: auto;
 }
@@ -303,7 +304,7 @@ img {
   object-fit: cover;
 }
 
-/* Transformations pour les cartes */
+
 #album-1:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(1),
 #album-2:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(2),
 #album-3:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(3) {
@@ -328,7 +329,7 @@ img {
   z-index: 1;
 }
 
-/* Masquer les boutons radio */
+
 input[type="radio"] {
   display: none;
 }
@@ -385,7 +386,7 @@ video {
   border-radius: 8px;
 }
 
-/* Cours des cercles animés */
+
 .circlesContainer {
   position: absolute;
   top: 0;
@@ -395,7 +396,7 @@ video {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  z-index: -1; /* Placer les cercles en arrière-plan */
+  z-index: -1; 
 }
 
 .circle {
@@ -420,7 +421,6 @@ video {
   animation: circle 2s infinite linear;
 }
 
-/* Animation des cercles */
 @keyframes circle {
   from {
     transform: scale(0);
@@ -428,4 +428,48 @@ video {
   to {
     transform: scale(6);
   }
+}
+
+#albumButtons {
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.refreshButton {
+  background-color: #fff;
+  color: black;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+}
+
+.buyButton {
+  background-color: black;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  width: 200px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.badv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }

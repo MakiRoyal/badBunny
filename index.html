@@ -19,6 +19,10 @@
           <button class="listenNow">
             <span class="textBtn">Écouter maintenant</span>
           </button>
+          <div id="albumButtons">
+            <button class="refreshButton" onclick="window.location.reload()">Générer une nouvelle cover</button>
+            <button class="buyButton" onclick="window.location.href='https://example.com/acheter-album'">Acheter l'album</button>
+          </div>
         </div>
         <div id="albumCoverContainer">
           <canvas id="albumCover"></canvas>
@@ -60,9 +64,18 @@
     </div>
 
     <div class="newsong-container">
-      <video src="./public/badv1.mov"></video>
-      <video src="./public/badv2.mov"></video>
-      <video src="./public/badv3.mov"></video>
+      <div class="badv">
+        <video src="./public/badv1.mov"></video>
+        <p>Noche de verano</p>
+      </div>
+      <div class="badv">
+        <video src="./public/badv2.mov"></video>
+        <p>Fiesta sin fin</p>
+      </div>
+      <div class="badv">
+        <video src="./public/badv3.mov"></video>
+        <p>Mundos paralelos</p>
+      </div>
     </div>
 
     <div id="statsSection">
@@ -125,7 +138,7 @@
         </div>
         <div class="review">
           <p id="reviewAuthor">Figaro:</p>
-          <p id="reviewContent">"Lorem ipsum dolor sit amet consectetur adipisicing elit."</p>
+          <p id="reviewContent">"Cet album est une ode à la vie et à la joie de vivre, et on ne peut s'empêcher de danser et de chanter sur chaque morceau."</p>
         </div>
       </div>
     </div>
