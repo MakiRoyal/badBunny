@@ -264,6 +264,7 @@ img {
 
 .lastAlbumContainer{
   padding: 1rem 0 0 4rem;
+  position: relative;
 }
 
 .lastAlbum-carousel {
@@ -382,4 +383,49 @@ video {
   width: 200px;
   height: 200px;
   border-radius: 8px;
+}
+
+/* Cours des cercles animés */
+.circlesContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: -1; /* Placer les cercles en arrière-plan */
+}
+
+.circle {
+  margin: 0 auto;
+  width: 50px;
+  height: 50px;
+  border: 5px solid #F86C25;
+  border-radius: 50%;
+  position: absolute;
+  top: 5%;
+}
+
+.one {
+  animation: circle 4s infinite linear;
+}
+
+.two {
+  animation: circle 3s infinite linear;
+}
+
+.three {
+  animation: circle 2s infinite linear;
+}
+
+/* Animation des cercles */
+@keyframes circle {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(6);
+  }
 }
