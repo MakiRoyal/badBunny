@@ -3,89 +3,139 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   background-color: #040506;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 body {
   margin: 0;
 }
 
-/* Header Styles */
+/* Header */
+
 #header {
   display: flex;
   height: 100vh;
   width: 100vw;
-  background: rgb(255, 34, 34);
   background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
+  align-items: center;
 }
 
 #details {
-  margin: auto 100px;
+  margin: 4rem;
   width: 50vw;
   font-size: 18px;
 }
 
 #headerDetails {
-  opacity: 0.5;
   font-style: italic;
 }
 
 #imageHeader {
   margin: auto;
-  opacity: 0.5;
   width: 50vw;
 }
 
-/* About Content Styles */
-#aboutContent {
-  background-color: #040506;
-  width: 100vw;
+/* Animation de vague pour chaque lettre */
+@keyframes waveEffect {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-#aboutArtist,
-#aboutAlbum {
-  padding: 1rem 4rem;
+/* Appliquer l'animation à chaque titre */
+h1.waveTitle span {
+  display: inline-block;
+  animation: waveEffect 3s ease-in-out infinite; /* Animation continue avec répétition infinie */
+  opacity: 1;
+  background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Initialement cachée pour l'effet de vague */
+}
+
+h1.waveTitle {
+  display: inline-block;
+  font-size: 3rem;
+  font-family: 'Playfair Display', serif;
+  margin: 20px 0;
   text-align: center;
+  color: #FF6F00; /* Couleur chaude pour le texte principal */
+  text-shadow: 2px 2px 5px rgba(255, 87, 34, 0.7); /* Ombre portée avec une teinte chaude */
+  word-spacing: 10px; /* Ajouter de l'espace entre les mots */
+  white-space: nowrap; /* Empêcher les mots de se casser */
 }
 
-#aboutAlbum ul {
-  padding-left: 1.2rem;
-  margin: 0;
-  opacity: 0.5;
+/* Carrousel Styles et autres sections */
+.newAlbumSongCover {
+  width: 200px;
+  height: 200px;
 }
 
-#aboutAlbum li {
-  margin: 0;
-  padding: 0;
-  list-style-position: inside;
-  font-size: 18px;
+.coverSol {
+  background-color: #040506;
+  border-radius: 12px;
+  padding: 0 20px;
+  width: fit-content;
 }
 
-
-#textAbout {
-  opacity: 0.5;
-  font-size: 18px;
+#canvas {
+  margin: 0 auto;
+  display: block;
+  filter: url('#shadowed-goo');
 }
 
+#albumCoverContainer {
+  margin: 2rem;
+}
+
+#albumCover {
+  border-radius: 8px;
+  width: 500px;
+}
+
+/* Autres styles pour le reste du site */
 .listenNow {
-  background-color: white;
+  background-color: #040506;
   padding: 1rem 4rem;
   border: none;
   border-radius: 8px;
 }
 
 .textBtn {
-  color: #040506;
+  color:  #FFF;
   font-size: larger;
   font-weight: bold;
 }
 
-.aboutTitle {
-  font-size: 2rem;
-  font-weight: bold;
+#header {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
   background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  align-items: center;
+}
+
+#details {
+  margin: 4rem;
+  width: 50vw;
+  font-size: 18px;
+}
+
+#headerDetails {
+  font-style: italic;
+}
+
+#imageHeader {
+  margin: auto;
+  width: 50vw;
 }
 
 /* Carrousel Styles */
@@ -163,7 +213,6 @@ img {
   margin: 4rem auto;
   justify-content: space-around;
   margin-top: 2rem;
-
   img{
     height: 250px;
     width: 250px;
@@ -171,36 +220,23 @@ img {
 }
 
 #statsSection{
-  padding-top: 2rem;
+  padding: 1rem 4rem;
   background-color: white;
-  height: 350px;
-}
-
-#statsTitle{
-  width: 600px;
-  margin-bottom: 4rem;
-  padding-left: 9rem;
-  font-size: 3rem;
-  font-weight: bold;
-  background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 #stats {
   display: flex;
-  flex-direction: row; /* Aligne les statistiques en ligne */
-  justify-content: space-between; /* Espacement entre les éléments */
-  align-items: center; /* Centre verticalement les images et le texte */
-  gap: 2rem; /* Espacement entre chaque élément */
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
   margin: auto;
-  width: 80%; /* Ajuste la largeur totale */
+  width: 80%;
 }
 
 #stat {
   display: flex;
-  align-items: center; /* Centre verticalement le texte et l'image */
-  gap: 1rem; /* Espacement entre l'image et le texte */
+  align-items: center;
+  gap: 1rem;
 }
 
 #stat img {
@@ -227,16 +263,15 @@ img {
 }
 
 .lastAlbumContainer{
-  padding: 4rem;
+  padding: 1rem 0 0 4rem;
 }
 
-/* Styles pour le carrousel des derniers albums */
 .lastAlbum-carousel {
   position: relative;
   width: 100%;
   max-width: 800px;
   height: 300px;
-  margin: 20px auto;
+  margin: 0 auto;
   transform-style: preserve-3d;
 }
 
@@ -255,7 +290,7 @@ img {
   height: 80%;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 0 auto;
   transition: transform 0.4s ease, opacity 0.4s ease;
   cursor: pointer;
 }
@@ -280,7 +315,7 @@ img {
 #album-2:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(3),
 #album-3:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(1) {
   transform: translateX(40%) scale(0.8);
-  opacity: 0.6;
+  opacity: 0.4;
   z-index: 1;
 }
 
@@ -288,7 +323,7 @@ img {
 #album-2:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(1),
 #album-3:checked ~ .lastAlbum-cards .lastAlbum-card:nth-child(2) {
   transform: translateX(-40%) scale(0.8);
-  opacity: 0.6;
+  opacity: 0.4;
   z-index: 1;
 }
 
@@ -297,28 +332,54 @@ input[type="radio"] {
   display: none;
 }
 
-#pressReview h1{
-  font-size: 2rem;
-  font-weight: bold;
-  background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .pressReviewContainer{
-  padding: 4rem;
+  padding: 0 4rem;
   width: 80%;
+  h1{
+    background: linear-gradient(180deg, rgba(255, 34, 34, 1) 0%, rgba(255, 136, 105, 1) 44%, rgba(255, 139, 0, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
-#review{
+#reviewContainer{
   display: flex;
   justify-content: space-between;
   margin: auto;
   width: 80%;
+  height: 300px;
+}
+
+.review{
+  justify-content: space-between;
+  width: 40%;
+  align-items: center;
 }
 
 #reviewAuthor{
-  font-size: 48px;
+  font-size: 2rem;
 }
-#reviewContent{
-  font-size: 24px;
+
+#albumCoverContainer{
+  margin: 2rem;
+}
+
+#albumCover{
+  border-radius: 8px;
+  width: 500px;
+}
+
+#aboutAlbum {
+  padding-left: 4rem;
+  padding-top: 4rem;
+}
+
+#aboutArtist {
+  padding-top: 4rem;
+  padding-left: 4rem;
+}
+
+video {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
 }

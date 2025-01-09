@@ -5,79 +5,43 @@ const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 
-// Colors for the animation (warm colors only)
-const colors = [
-  "rgba(251, 56, 90, 0.7)",  // Warm pink (#FB385A)
-  "rgba(248, 108, 37, 0.7)"   // Warm orange (#F86C25)
+// Palette of colors for the circles
+const palette = [
+  "#F82529", "#F86C25", "#F9A339", "#F9C54E",
+  "#94C072", "#46AF8F"
 ];
 
-// Variables for the animation
-let angles = []; // Array to store individual angles for each arc
-let radii = []; // Array to store individual radii for each arc
-let speeds = []; // Array to store random speeds for each arc
+// Default settings for animation
+const settings = {
+  backgroundColor: "rgba(0, 0, 0, 0.8)", // Dark background
+  gradientStart: "rgba(251, 56, 90, 0.4)", // Warm pink
+  gradientEnd: "rgba(0, 0, 0, 0.8)", // Black
+  glowIntensity: 30, // Shadow blur intensity
+};
 
-let numArcs = 30; // Increased the number of arcs (more lines)
-let arcDistance = 40; // Distance from the center to the arc's endpoint
-let numLayers = 6; // Number of layers of arcs (increased for more complexity)
+// Generate random settings for circles
+let numArcs = Math.floor(Math.random() * 10) + 5; // Random number of arcs (5–15)
+let speeds = Array.from({ length: numArcs }, () => Math.random() * 0.03 + 0.02); // Random speed (0.02–0.05)
+let colors = Array.from({ length: numArcs }, () => palette[Math.floor(Math.random() * palette.length)]); // Random colors
+let angles = Array.from({ length: numArcs }, () => 0); // Start angle for each arc
+let radii = Array.from({ length: numArcs }, (_, i) => 100 + i * 20); // Layered radii for arcs
+
+// Rotation angle for the text
+let textAngle = 0;
 
 // Star properties
 let stars = [];
-let numStars = 50; // Number of stars
+let numStars = 50;
 
-// Initialize the properties for each arc in each layer
-for (let layer = 0; layer < numLayers; layer++) {
-  let anglesLayer = [];
-  let radiiLayer = [];
-  let speedsLayer = [];
-
-  for (let i = 0; i < numArcs; i++) {
-    anglesLayer.push(0); // Start angle for each arc
-    radiiLayer.push(150 - (layer * 30)); // Decrease radius for each layer
-    speedsLayer.push(Math.random() * 0.05 + 0.01); // Random speed for each arc
-  }
-
-  angles.push(anglesLayer);
-  radii.push(radiiLayer);
-  speeds.push(speedsLayer);
-}
-
-// Initialize the stars with random positions and sizes
+// Initialize stars
 for (let i = 0; i < numStars; i++) {
   stars.push({
-    x: Math.random() * canvas.width, // Random x position
-    y: Math.random() * canvas.height, // Random y position
-    size: Math.random() * 2 + 1, // Random size between 1 and 3
-    speed: Math.random() * 0.05 + 0.02, // Speed of size change
-    growing: Math.random() > 0.5 // Randomly decide if the star is growing or shrinking
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2 + 1,
+    speed: Math.random() * 0.05 + 0.02,
+    growing: Math.random() > 0.5,
   });
-}
-
-// Function to draw the stars that will form the text "Bad Bunny"
-function drawTextWithStars(text, x, y) {
-  ctx.font = "70px 'Playfair Display', serif"; // Using Playfair Display font
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillStyle = "white";
-  
-  // Loop over each character of the text
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    
-    // Draw stars around each character
-    for (let j = 0; j < 100; j++) { // 100 stars per character
-      const offsetX = (i * 75) + Math.random() * 10 - 5; // Position of each star around the character
-      const offsetY = Math.random() * 10 - 5;
-      
-      // Draw a star
-      ctx.beginPath();
-      ctx.arc(x + offsetX, y + offsetY, Math.random() * 2 + 1, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(255, 255, 255, 0.8)"; // White stars with some transparency
-      ctx.fill();
-    }
-  }
-
-  // Draw the text itself at the center position
-  ctx.fillText(text, x, y);
 }
 
 // Draw the animated arcs for all layers and the stars
@@ -87,73 +51,108 @@ function drawAnimation() {
   const centerX = canvas.width / 2;
   const centerY = canvas.height / 2;
 
-  // Background color with gradient to simulate a dreamy, glowing effect
+  // Background gradient
   let gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, canvas.width / 2);
-  gradient.addColorStop(0, "rgba(251, 56, 90, 0.4)");
-  gradient.addColorStop(1, "rgba(0, 0, 0, 0.8)");
+  gradient.addColorStop(0, settings.gradientStart);
+  gradient.addColorStop(1, settings.gradientEnd);
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Apply shadow properties to create the glowing effect with warm colors
-  ctx.shadowColor = "rgba(248, 108, 37, 0.7)"; // Warm orange shadow for glowing effect
-  ctx.shadowBlur = 30; // Increase this value for a more intense glow
-  ctx.shadowOffsetX = 0; // No horizontal shadow offset
-  ctx.shadowOffsetY = 0; // No vertical shadow offset
+  // Apply shadow properties for arcs
+  ctx.shadowColor = settings.gradientStart;
+  ctx.shadowBlur = settings.glowIntensity;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
 
-  // Loop through each layer of arcs
-  for (let layer = 0; layer < numLayers; layer++) {
-    for (let i = 0; i < numArcs; i++) {
-      let radius = radii[layer][i];
+  // Draw arcs
+  for (let i = 0; i < numArcs; i++) {
+    const radius = radii[i];
+    const startAngle = angles[i];
+    const endAngle = startAngle + Math.PI / 3; // Fixed arc size
+    ctx.strokeStyle = colors[i % colors.length];
+    ctx.lineWidth = 3;
 
-      // Draw the animated arcs around the center
-      const startAngle = angles[layer][i] + (i * Math.PI / (numArcs / 2)); // Spread arcs evenly around the circle
-      const endAngle = startAngle + Math.PI / (numArcs / 2); // Control the size of each arc
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+    ctx.stroke();
 
-      // Set the color for each arc (using the two specified warm colors)
-      ctx.strokeStyle = colors[i % colors.length];
-      ctx.lineWidth = 3;
-
-      // Draw the arc
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius + arcDistance, startAngle, endAngle);
-      ctx.stroke();
-      
-      // Update the angle for this arc's movement (different speeds)
-      angles[layer][i] += speeds[layer][i]; // Increment the angle based on the arc's speed
-    }
+    angles[i] += speeds[i]; // Increment angle for movement
   }
 
-  // Draw stars in the background
+  // Draw rotating text with gradient
+  ctx.save();
+  ctx.translate(centerX, centerY); // Move the origin to the center
+  ctx.rotate(textAngle); // Apply rotation
+
+  // Create gradient for the text
+  const textGradient = ctx.createLinearGradient(-150, 0, 150, 0); // Horizontal gradient
+  textGradient.addColorStop(0, "#F82529");
+  textGradient.addColorStop(0.5, "#F86C25");
+  textGradient.addColorStop(1, "#F9A339");
+
+  ctx.font = "50px 'Playfair Display', serif"; // Text font
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = textGradient; // Apply the gradient
+  ctx.shadowColor = "rgba(255, 255, 255, 0.7)"; // Glow for the text
+  ctx.shadowBlur = 20;
+  ctx.fillText("Sol y Sombra", 0, 0); // Draw text at the center
+  ctx.restore();
+
+  textAngle += 0.01; // Increment the text's rotation angle
+
+  // Draw stars
   for (let i = 0; i < numStars; i++) {
     let star = stars[i];
-
-    // Update the star size
     if (star.growing) {
-      star.size += star.speed; // Increase size
-      if (star.size > 1.5) {
-        star.growing = false; // Switch to shrinking
-      }
+      star.size += star.speed;
+      if (star.size > 1.5) star.growing = false;
     } else {
-      star.size -= star.speed; // Decrease size
-      if (star.size < 1) {
-        star.growing = true; // Switch to growing
-      }
+      star.size -= star.speed;
+      if (star.size < 1) star.growing = true;
     }
-
-    // Draw the star
     ctx.beginPath();
-    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 3);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.8)"; // White stars with some transparency
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+    ctx.fillStyle = "#FFFFFF"; // White stars
     ctx.fill();
   }
-
 }
 
 // Animate the scene
 function animate() {
-  drawAnimation(); // Draw the animated arcs and stars
-  requestAnimationFrame(animate); // Repeat the animation
+  drawAnimation();
+  requestAnimationFrame(animate);
 }
+
+// Initialize Tweakpane (without color selection)
+const pane = new Tweakpane.Pane();
+
+pane.addInput(settings, "backgroundColor", { label: "Background Color" }).on("change", () => {});
+pane.addInput(settings, "gradientStart", { label: "Gradient Start" }).on("change", () => {});
+pane.addInput(settings, "gradientEnd", { label: "Gradient End" }).on("change", () => {});
+pane.addInput(settings, "glowIntensity", { label: "Glow Intensity", min: 0, max: 50 }).on("change", () => {});
 
 // Start animation
 animate();
+
+// Diviser chaque titre en lettres et les envelopper dans un élément <span>
+const titles = document.querySelectorAll('h1.waveTitle'); // Sélectionner tous les h1 avec la classe waveTitle
+
+titles.forEach(title => {
+  const text = title.textContent;
+  title.innerHTML = ''; // Vider le contenu actuel du titre
+
+  // Ajouter chaque lettre dans un <span>
+  text.split('').forEach((letter, index) => {
+    const span = document.createElement('span');
+    span.textContent = letter;
+    title.appendChild(span);
+    
+    // Ajouter un délai pour chaque lettre, créant l'effet de vague
+    span.style.animationDelay = `${index * 0.05}s`;
+
+    // Ajouter un peu d'espacement entre les lettres
+    span.style.marginRight = '5px';  // Vous pouvez ajuster cette valeur
+  });
+});
+
