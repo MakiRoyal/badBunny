@@ -1,13 +1,16 @@
 const canvas = document.getElementById("albumCover");
 const ctx = canvas.getContext("2d");
 
+
 canvas.width = 800;
 canvas.height = 800;
 
-const warmPalette = [
-  "#FF5733", "#FF6F61", "#FF8C42", "#FFB300",
-  "#F9C74F", "#F39C12", "#E74C3C", "#D35400"
+
+const palette = [
+  "#F82529", "#F86C25", "#F9A339", "#F9C54E",
+  "#94C072", "#46AF8F"
 ];
+
 
 const settings = {
   backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -16,16 +19,21 @@ const settings = {
   glowIntensity: 30,
 };
 
+
 let numArcs = Math.floor(Math.random() * 10) + 5;
 let speeds = Array.from({ length: numArcs }, () => Math.random() * 0.03 + 0.02);
-let colors = Array.from({ length: numArcs }, () => warmPalette[Math.floor(Math.random() * warmPalette.length)]);
+let colors = Array.from({ length: numArcs }, () => palette[Math.floor(Math.random() * palette.length)]);
 let angles = Array.from({ length: numArcs }, () => 0);
 let radii = Array.from({ length: numArcs }, (_, i) => 100 + i * 20);
 
+
 let textAngle = 0;
+
 
 let stars = [];
 let numStars = 50;
+
+
 for (let i = 0; i < numStars; i++) {
   stars.push({
     x: Math.random() * canvas.width,
@@ -35,6 +43,7 @@ for (let i = 0; i < numStars; i++) {
     growing: Math.random() > 0.5,
   });
 }
+
 
 function drawAnimation() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -67,7 +76,7 @@ function drawAnimation() {
     ctx.arc(centerX, centerY, radius, startAngle, endAngle);
     ctx.stroke();
 
-    angles[i] += speeds[i]; 
+    angles[i] += speeds[i];
   }
 
 
@@ -75,10 +84,11 @@ function drawAnimation() {
   ctx.translate(centerX, centerY);
   ctx.rotate(textAngle);
 
+
   const textGradient = ctx.createLinearGradient(-150, 0, 150, 0);
-  textGradient.addColorStop(0, "#FF5733");
-  textGradient.addColorStop(0.5, "#FF6F61");
-  textGradient.addColorStop(1, "#FF8C42");
+  textGradient.addColorStop(0, "#F82529");
+  textGradient.addColorStop(0.5, "#F86C25");
+  textGradient.addColorStop(1, "#F9A339");
 
   ctx.font = "50px 'Playfair Display', serif";
   ctx.textAlign = "center";
@@ -108,15 +118,40 @@ function drawAnimation() {
   }
 }
 
+
 function animate() {
   drawAnimation();
   requestAnimationFrame(animate);
 }
 
-animate();
 
 const pane = new Tweakpane.Pane();
+
 pane.addInput(settings, "backgroundColor", { label: "Background Color" }).on("change", () => {});
 pane.addInput(settings, "gradientStart", { label: "Gradient Start" }).on("change", () => {});
 pane.addInput(settings, "gradientEnd", { label: "Gradient End" }).on("change", () => {});
 pane.addInput(settings, "glowIntensity", { label: "Glow Intensity", min: 0, max: 50 }).on("change", () => {});
+
+
+animate();
+
+
+const titles = document.querySelectorAll('h1.waveTitle');
+
+titles.forEach(title => {
+  const text = title.textContent;
+  title.innerHTML = '';
+
+
+  text.split('').forEach((letter, index) => {
+    const span = document.createElement('span');
+    span.textContent = letter;
+    title.appendChild(span);
+
+
+    span.style.animationDelay = `${index * 0.05}s`;
+
+
+    span.style.marginRight = '5px';
+  });
+});
